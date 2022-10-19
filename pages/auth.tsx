@@ -4,7 +4,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import Button from "@mui/material/Button";
 import useGoogleAuth from "../shared/hooks/auth/useGoogleAuth";
 import CircularProgress from "@mui/material/CircularProgress";
-import MagicLink from "../components/MagicLink";
+import MagicLink from "../components/auth/MagicLink";
 import useUser from "../shared/hooks/auth/useUser";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -37,7 +37,7 @@ const Auth: NextPage = () => {
             px: "2rem",
             borderRadius: "1rem",
             boxShadow: "1rem",
-            width: { xs: "100%", md: "70%" },
+            width: { xs: "100%", md: "40%", lg: "30%" },
           }}
         >
           <Button

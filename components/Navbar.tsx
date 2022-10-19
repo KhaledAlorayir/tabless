@@ -59,7 +59,7 @@ const Navbar = (props: Props) => {
             <>
               {data ? (
                 <Box sx={{ flexGrow: 0 }}>
-                  <Tooltip title="Open settings">
+                  <Tooltip title={data.email}>
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                       <Avatar
                         alt="avatar"

@@ -14,13 +14,14 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { supabase } from "../shared/supabase";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import Alerts from "../components/Alerts";
 
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
   },
 });
-
+// change theme logout
 const qc = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -45,7 +46,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <CssBaseline />
         <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
           <Navbar />
-          <Container sx={{ flex: 1 }}>
+          <Alerts />
+          <Container sx={{ flex: 1 }} maxWidth={false}>
             <Component {...pageProps} />
           </Container>
         </Box>

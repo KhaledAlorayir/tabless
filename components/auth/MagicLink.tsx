@@ -8,7 +8,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import TextField from "@mui/material/TextField";
 import DialogActions from "@mui/material/DialogActions";
 import CircularProgress from "@mui/material/CircularProgress";
-import useMagicLink from "../shared/hooks/auth/useMagicLink";
+import useMagicLink from "../../shared/hooks/auth/useMagicLink";
 import { useState } from "react";
 
 const MagicLink = () => {
