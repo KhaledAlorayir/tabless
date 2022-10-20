@@ -43,6 +43,7 @@ const Home: NextPage = () => {
         href="https://github.com/KhaledAlorayir"
         color="textSecondary"
         target="_blank"
+        rel="noopener noreferrer"
         sx={{ textDecoration: "none" }}
       >
         Made By Khaled Alorayir.

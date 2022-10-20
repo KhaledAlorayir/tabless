@@ -11,9 +11,6 @@ export interface Link {
   tid: number;
   title: string;
   url: string;
-  link_type: {
-    type: string;
-  };
 }
 
 export interface Link_Insert {

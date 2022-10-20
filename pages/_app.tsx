@@ -4,17 +4,14 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import Container from "@mui/material/Container";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import Navbar from "../components/Navbar";
-import Box from "@mui/material/Box";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { supabase } from "../shared/supabase";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import Alerts from "../components/Alerts";
+import AppLayout from "../components/AppLayout";
 
 const darkTheme = createTheme({
   palette: {
@@ -44,13 +41,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={qc}>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-          <Navbar />
-          <Alerts />
-          <Container sx={{ flex: 1 }} maxWidth={false}>
-            <Component {...pageProps} />
-          </Container>
-        </Box>
+        <AppLayout>
+          <Component {...pageProps} />
+        </AppLayout>
       </ThemeProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
@@ -58,3 +51,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp;
+
+/*
+TODO:
+ - [] Loading/empty handling
+ - [] editing
+ - [] onAuthChange soultions (tabs)
+ - [] pagination
+ - [] filter?
+*/
