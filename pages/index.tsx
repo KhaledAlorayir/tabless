@@ -4,10 +4,15 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Link from "next/link";
 import useUser from "../shared/hooks/auth/useUser";
+import { useTheme as useThemeStore } from "../shared/store";
+import { useTheme } from "@mui/material";
 
 const Home: NextPage = () => {
   const { data } = useUser();
-
+  const switchTheme = useThemeStore((store) => store.switchTheme);
+  const {
+    palette: { mode },
+  } = useTheme();
   return (
     <Box
       sx={{
@@ -36,18 +41,19 @@ const Home: NextPage = () => {
           </Button>
         </Link>
       </Box>
-      <Typography
-        position="absolute"
-        bottom={15}
-        component="a"
-        href="https://github.com/KhaledAlorayir"
-        color="textSecondary"
-        target="_blank"
-        rel="noopener noreferrer"
-        sx={{ textDecoration: "none" }}
-      >
-        Made By Khaled Alorayir.
-      </Typography>
+      <Box position="absolute" bottom={15}>
+        <Typography
+          component="a"
+          href="https://github.com/KhaledAlorayir"
+          color="textSecondary"
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{ textDecoration: "none" }}
+        >
+          Made By Khaled Alorayir.
+        </Typography>
+        <Button onClick={switchTheme}>{mode === "light" ? "🌙" : "😎"}</Button>
+      </Box>
     </Box>
   );
 };

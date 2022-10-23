@@ -14,7 +14,7 @@ import { useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import useSignout from "../shared/hooks/auth/useSignout";
 import { useRouter } from "next/router";
-
+import { useTheme } from "../shared/store";
 type Props = {};
 
 const Navbar = (props: Props) => {
@@ -31,6 +31,7 @@ const Navbar = (props: Props) => {
   const { mutate } = useSignout();
   const { data, isLoading } = useUser();
   const router = useRouter();
+  const theme = useTheme((store) => store.theme);
 
   return (
     <Box>

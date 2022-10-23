@@ -7,6 +7,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import Typography from "@mui/material/Typography";
 import dayjs from "dayjs";
 import useDeleteLink from "../../shared/hooks/db/useDeleteLink";
+import { useEdit } from "../../shared/store";
 
 type Props = {
   link: Link;
@@ -14,6 +15,7 @@ type Props = {
 
 const LinkCard = ({ link }: Props) => {
   const { mutate, isLoading } = useDeleteLink();
+  const setEdit = useEdit((store) => store.setEdit);
 
   return (
     <Card>
@@ -44,7 +46,9 @@ const LinkCard = ({ link }: Props) => {
         >
           Go
         </Button>
-        <Button size="small">Edit</Button>
+        <Button onClick={() => setEdit(link)} size="small">
+          Edit
+        </Button>
         <LoadingButton
           onClick={() => {
             mutate(link.id);

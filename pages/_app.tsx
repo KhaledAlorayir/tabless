@@ -7,28 +7,32 @@ import "@fontsource/roboto/700.css";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { supabase } from "../shared/supabase";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AppLayout from "../components/AppLayout";
+import { useTheme } from "../shared/store";
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
-// change theme logout
 const qc = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const [mode, setMode] = useState<"dark" | "light">("dark");
+  const themeMode = useTheme((store) => store.theme);
+
+  const Theme = createTheme({
+    palette: {
+      mode,
+    },
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    setMode(themeMode);
+  }, [themeMode]);
 
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange((event) => {
-      if (event === "SIGNED_IN") {
-        router.push("/home");
-      }
       if (event == "SIGNED_OUT") {
         router.push("/");
       }
@@ -39,24 +43,14 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={qc}>
-      <ThemeProvider theme={darkTheme}>
+      <ThemeProvider theme={Theme}>
         <CssBaseline />
         <AppLayout>
           <Component {...pageProps} />
         </AppLayout>
       </ThemeProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
 
 export default MyApp;
-
-/*
-TODO:
- - [] Loading/empty handling
- - [] editing
- - [] onAuthChange soultions (tabs)
- - [] pagination
- - [] filter?
-*/

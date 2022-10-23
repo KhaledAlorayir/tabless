@@ -4,6 +4,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 const signinViaGoogle = async () => {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
+    options: {
+      redirectTo: process.env.NEXT_PUBLIC_REDIRECT_URL,
+    },
   });
 
   if (error) {

@@ -18,6 +18,12 @@ export interface Link_Insert {
   url: string;
   type: number;
 }
+export interface Link_Update {
+  title: string;
+  url: string;
+  type: number;
+  id: string;
+}
 
 export interface Alert {
   message: string;
