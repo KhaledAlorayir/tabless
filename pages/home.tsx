@@ -19,7 +19,7 @@ export const getStaticProps = async () => {
   };
 };
 
-const home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
+const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   link_types,
 }) => {
   const { data, isLoading } = useUser();
@@ -49,4 +49,4 @@ const home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   );
 };
 
-export default home;
+export default Home;
