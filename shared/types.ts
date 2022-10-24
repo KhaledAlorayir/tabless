@@ -29,3 +29,8 @@ export interface Alert {
   message: string;
   type: "ERR" | "SUC";
 }
+
+export interface Filter {
+  query: string;
+  type: 0 | 1 | 2;
+}

@@ -1,18 +1,23 @@
-import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { supabase } from "../../supabase";
-import { useAlerts } from "../../store";
+import { useAlerts, useFilter } from "../../store";
 import { Link } from "../../types";
+import { getTypeQuery, getPagination } from "../../Helpers";
 const PAGE_LIMIT = 32;
 
 const getLinks = async ({ pageParam = 1 }: any) => {
-  let to = pageParam * PAGE_LIMIT - 1;
-  let from = (pageParam - 1) * PAGE_LIMIT;
+  const { from, to } = getPagination(pageParam, PAGE_LIMIT);
+  const { query, type } = useFilter.getState().filter;
+  const typeQuery = getTypeQuery(type);
 
   const { data, error } = await supabase
     .from("link")
     .select("*")
     .order("created_at", { ascending: false })
-    .range(from, to);
+    .range(from, to)
+    .filter("tid", "in", typeQuery)
+    .or(`title.ilike.%${query}%,url.ilike.%${query}%`);
+
   if (error) {
     throw error;
   }

@@ -95,7 +95,7 @@ const Insert = ({ link_types }: Props) => {
       <Dialog fullWidth={true} open={isOpen}>
         {!(AddLoading || EdiLoading) ? (
           <form onSubmit={handleSubmit(insertHandler)}>
-            <DialogTitle>Add Link 👇</DialogTitle>
+            <DialogTitle>{EditLink ? "Edit" : "Add"} Link 👇</DialogTitle>
             <DialogContent>
               <TextField
                 autoFocus
@@ -165,7 +165,7 @@ const Insert = ({ link_types }: Props) => {
               <Button onClick={close} color="error">
                 Cancel
               </Button>
-              <Button type="submit">Send</Button>
+              <Button type="submit">{EditLink ? "update" : "send"}</Button>
             </DialogActions>
           </form>
         ) : (

@@ -7,6 +7,7 @@ import { supabase } from "../shared/supabase";
 import { Link_type } from "../shared/types";
 import Insert from "../components/home/Insert";
 import LinkList from "../components/home/LinkList";
+import Filter from "../components/home/Filter";
 
 export const getStaticProps = async () => {
   const { data } = await supabase.from("link_type").select("*");
@@ -24,7 +25,6 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 }) => {
   const { data, isLoading } = useUser();
   const router = useRouter();
-
   useEffect(() => {
     let ignore = false;
 
@@ -40,7 +40,8 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   return (
     <>
       {data && (
-        <Box sx={{ height: "100%" }}>
+        <Box px={4} height="100%">
+          <Filter link_types={link_types} />
           <Insert link_types={link_types} />
           <LinkList />
         </Box>

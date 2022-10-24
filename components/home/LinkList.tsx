@@ -42,10 +42,10 @@ const LinkList = (props: Props) => {
               style={{ overflow: "unset" }}
             >
               <Grid
-                p={4}
                 container
                 spacing={{ xs: 2, md: 3 }}
                 columns={{ xs: 4, sm: 8, md: 12 }}
+                mb={2}
               >
                 {links.map((l) => (
                   <Grid key={l.id} xs={12} sm={4} md={4} xl={3}>
@@ -56,7 +56,7 @@ const LinkList = (props: Props) => {
             </InfiniteScroll>
           ) : (
             <Stack alignItems="center" justifyContent="center" height="100%">
-              <Typography variant="h6">No links added yet! 🧙‍♂️</Typography>
+              <Typography variant="h6">No links! 🧙‍♂️</Typography>
             </Stack>
           )}
         </>

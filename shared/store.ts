@@ -1,6 +1,6 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
-import { Alert, Link } from "./types";
+import { Alert, Link, Filter } from "./types";
 
 interface AlertStoreType {
   alert: Alert | null;
@@ -20,6 +20,12 @@ interface EditStoreType {
 interface ThemeStoreType {
   theme: "light" | "dark";
   switchTheme: () => void;
+}
+
+interface FilterStoreType {
+  filter: Filter;
+  addFilter: (filter: Filter) => void;
+  clearFilter: () => void;
 }
 
 export const useAlerts = create<AlertStoreType>((set) => ({
@@ -61,11 +67,12 @@ export const useTheme = create(
   }))
 );
 
-/*
-(set) => ({
-  theme: "dark",
-  switchTheme: () => {
-    set(({ theme }) => ({ theme: theme === "dark" ? "light" : "dark" }));
+export const useFilter = create<FilterStoreType>((set) => ({
+  filter: { query: "", type: 0 },
+  addFilter: (filter) => {
+    set({ filter });
   },
-})
-*/
+  clearFilter: () => {
+    set({ filter: { query: "", type: 0 } });
+  },
+}));

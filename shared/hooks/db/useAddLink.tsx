@@ -1,10 +1,6 @@
-import {
-  InfiniteData,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "../../supabase";
-import { Link, Link_Insert } from "../../types";
+import { Link_Insert } from "../../types";
 import { useAlerts } from "../../store";
 
 const addLink = async (values: Link_Insert) => {

@@ -34,7 +34,7 @@ const LinkCard = ({ link }: Props) => {
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {dayjs(link.created_at).format("hh:mm a - MMM D, YYYY")}
-          {link.tid === 1 ? " 😊" : " 😢"}
+          {link.tid === 1 ? " 😊" : link.tid === 2 ? "😢" : ""}
         </Typography>
       </CardContent>
       <CardActions>
