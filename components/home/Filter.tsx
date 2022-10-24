@@ -15,28 +15,31 @@ type Props = {
 };
 
 const Filter = ({ link_types }: Props) => {
+  const { addFilter, clearFilter, filter } = useFilter((store) => store);
+  const qc = useQueryClient();
+
   const {
     register,
     control,
     handleSubmit,
     formState: { errors },
-    reset,
+    setValue,
   } = useForm({
-    defaultValues: { query: "", type: 0 },
+    defaultValues: { query: filter.query, type: filter.type },
     mode: "onChange",
   });
-  const addFilter = useFilter((store) => store.addFilter);
-  const clearFilter = useFilter((store) => store.clearFilter);
-  const qc = useQueryClient();
 
   const filterHandler = (values: any) => {
-    addFilter({ query: values.query, type: values.type });
-    qc.invalidateQueries(["links"]);
+    if (values.query.trim() !== filter.query || values.type !== filter.type) {
+      addFilter({ query: values.query.trim(), type: values.type });
+      qc.invalidateQueries(["links"]);
+    }
   };
 
   const clearHandler = () => {
     clearFilter();
-    reset();
+    setValue("type", 0);
+    setValue("query", "");
     qc.invalidateQueries(["links"]);
   };
 
