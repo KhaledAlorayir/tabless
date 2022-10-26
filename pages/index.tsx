@@ -26,8 +26,15 @@ const Home: NextPage = () => {
         <Typography variant="h2" fontWeight="700" mb={2}>
           Tabless 🦄
         </Typography>
-        <Typography variant="h6" mb={6}>
+        <Typography variant="h6" mb={3}>
           save your urls in one place and share them accros multiple devices 👻
+        </Typography>
+        <Typography variant="body1" mb={6}>
+          you can add urls from the home page or just type{" "}
+          <Typography component="span" color="primary">
+            tabless.vercel.app/
+          </Typography>{" "}
+          in front of any url to save it!
         </Typography>
         <Link href={data ? "/home" : "/auth"} passHref>
           <Button

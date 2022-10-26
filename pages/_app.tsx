@@ -44,11 +44,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 todo:
 - [x] filter reset vali
 - [x] fav ico
-- [] add by url 
-- [] home page text
+- [x] add by url 
+- [x] home page text
 - [] title
 - [] domain
-- [] metatags & favicon - fireship
+- [] metatags & favicon
 /https://tabless.vercel.app/
 */
 

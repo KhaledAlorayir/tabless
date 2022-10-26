@@ -8,6 +8,7 @@ import { Link_type } from "../shared/types";
 import Insert from "../components/home/Insert";
 import LinkList from "../components/home/LinkList";
 import Filter from "../components/home/Filter";
+import AutoInsert from "../components/home/AutoInsert";
 
 export const getStaticProps = async () => {
   const { data } = await supabase.from("link_type").select("*");
@@ -44,6 +45,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           <Filter link_types={link_types} />
           <Insert link_types={link_types} />
           <LinkList />
+          <AutoInsert />
         </Box>
       )}
     </>
