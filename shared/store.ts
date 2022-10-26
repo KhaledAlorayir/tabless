@@ -1,6 +1,6 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
-import { Alert, Link, Filter } from "./types";
+import { Alert, Link, Filter, AutoAdd } from "./types";
 
 interface AlertStoreType {
   alert: Alert | null;
@@ -26,6 +26,12 @@ interface FilterStoreType {
   filter: Filter;
   addFilter: (filter: Filter) => void;
   clearFilter: () => void;
+}
+
+interface AutoAddStoreType {
+  data: AutoAdd;
+  set: (title: string, url: string) => void;
+  clear: () => void;
 }
 
 export const useAlerts = create<AlertStoreType>((set) => ({
@@ -76,3 +82,15 @@ export const useFilter = create<FilterStoreType>((set) => ({
     set({ filter: { query: "", type: 0 } });
   },
 }));
+
+export const useAutoAdd = create(
+  persist<AutoAddStoreType>((set) => ({
+    data: null,
+    set: (title, url) => {
+      set({ data: { title, url } });
+    },
+    clear: () => {
+      set({ data: null });
+    },
+  }))
+);

@@ -11,8 +11,8 @@ const EditLink = async (values: Link_Update): Promise<Link[]> => {
   const { data, error } = await supabase
     .from("link")
     .update({
-      title: values.title,
-      url: values.url,
+      title: values.title.trim(),
+      url: values.url.trim(),
       tid: values.type,
     })
     .eq("id", values.id)

@@ -34,3 +34,8 @@ export interface Filter {
   query: string;
   type: 0 | 1 | 2;
 }
+
+export type AutoAdd = {
+  url: string;
+  title: string;
+} | null;

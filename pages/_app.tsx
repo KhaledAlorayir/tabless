@@ -39,4 +39,17 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
+/*
+
+todo:
+- [x] filter reset vali
+- [x] fav ico
+- [] add by url 
+- [] home page text
+- [] title
+- [] domain
+- [] metatags & favicon - fireship
+/https://tabless.vercel.app/
+*/
+
 export default MyApp;

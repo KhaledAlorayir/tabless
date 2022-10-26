@@ -37,10 +37,15 @@ const Filter = ({ link_types }: Props) => {
   };
 
   const clearHandler = () => {
-    clearFilter();
-    setValue("type", 0);
-    setValue("query", "");
-    qc.invalidateQueries(["links"]);
+    if (filter.query !== "" || filter.type !== 0) {
+      clearFilter();
+      setValue("type", 0);
+      setValue("query", "");
+      qc.invalidateQueries(["links"]);
+    } else {
+      setValue("type", 0);
+      setValue("query", "");
+    }
   };
 
   return (

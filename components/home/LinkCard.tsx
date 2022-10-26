@@ -5,9 +5,12 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import Avatar from "@mui/material/Avatar";
 import dayjs from "dayjs";
 import useDeleteLink from "../../shared/hooks/db/useDeleteLink";
 import { useEdit } from "../../shared/store";
+import LinkIcon from "@mui/icons-material/Link";
 
 type Props = {
   link: Link;
@@ -16,22 +19,32 @@ type Props = {
 const LinkCard = ({ link }: Props) => {
   const { mutate, isLoading } = useDeleteLink();
   const setEdit = useEdit((store) => store.setEdit);
+  const url_split = link.url.split("/");
 
   return (
     <Card>
       <CardContent>
-        <Typography
-          gutterBottom
-          variant="h6"
-          component="a"
-          href={link.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          sx={{ textDecoration: "none", display: "block" }}
-          color="textPrimary"
-        >
-          {link.title}
-        </Typography>
+        <Stack direction="row" alignItems="center" mb={2}>
+          <Avatar
+            src={`${url_split[0]}//${url_split[2]}/favicon.ico`}
+            alt="favicon"
+            sx={{ width: 20, height: 20 }}
+          >
+            <LinkIcon />
+          </Avatar>
+          <Typography
+            marginLeft={1}
+            variant="h6"
+            component="a"
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{ textDecoration: "none", display: "block" }}
+            color="textPrimary"
+          >
+            {link.title}
+          </Typography>
+        </Stack>
         <Typography variant="body2" color="text.secondary">
           {dayjs(link.created_at).format("hh:mm a - MMM D, YYYY")}
           {link.tid === 1 ? " 😊" : link.tid === 2 ? "😢" : ""}

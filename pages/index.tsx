@@ -27,8 +27,7 @@ const Home: NextPage = () => {
           Tabless 🦄
         </Typography>
         <Typography variant="h6" mb={6}>
-          close your 36 tabs, save your urls in one place and share them accros
-          multiple devices 👻
+          save your urls in one place and share them accros multiple devices 👻
         </Typography>
         <Link href={data ? "/home" : "/auth"} passHref>
           <Button

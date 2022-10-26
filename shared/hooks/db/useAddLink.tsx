@@ -5,8 +5,8 @@ import { useAlerts } from "../../store";
 
 const addLink = async (values: Link_Insert) => {
   const { error } = await supabase.from("link").insert({
-    title: values.title,
-    url: values.url,
+    title: values.title.trim(),
+    url: values.url.trim(),
     tid: values.type,
   });
 
