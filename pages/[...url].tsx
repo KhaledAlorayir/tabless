@@ -19,7 +19,9 @@ type Props = {
 export const getServerSideProps: GetServerSideProps<Props> = async ({
   query,
 }) => {
+  console.log(query);
   if (query.url) {
+    console.log(query);
     const arr = query.url as string[];
     arr[0] += "/";
     const joined = arr.join("/");
@@ -36,8 +38,14 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
     }
 
     if (isUrl(parsed_url)) {
-      const { title } = await getMetaData(parsed_url);
-      let parsed_title = title || parsed_url;
+      let parsed_title = "";
+      try {
+        const { title } = await getMetaData(parsed_url);
+        parsed_title = title || "";
+      } catch (err) {
+        parsed_title = parsed_url;
+      }
+
       parsed_title =
         parsed_title.length > 80 ? parsed_title.substring(0, 80) : parsed_title;
 
