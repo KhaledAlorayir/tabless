@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import AppLayout from "../components/AppLayout";
 import MUI from "../components/MUI";
-import Head from "next/head";
+import HeadTag from "../components/HeadTag";
 
 const qc = new QueryClient();
 
@@ -25,9 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Head>
-        <title>Tabless</title>
-      </Head>
+      <HeadTag />
       <QueryClientProvider client={qc}>
         <MUI>
           <AppLayout>
@@ -38,18 +36,5 @@ function MyApp({ Component, pageProps }: AppProps) {
     </>
   );
 }
-
-/*
-
-todo:
-- [x] filter reset vali
-- [x] fav ico
-- [x] add by url 
-- [x] home page text
-- [] title
-- [] domain
-- [] metatags & favicon
-/https://tabless.vercel.app/
-*/
 
 export default MyApp;

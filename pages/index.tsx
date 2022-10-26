@@ -32,7 +32,7 @@ const Home: NextPage = () => {
         <Typography variant="body1" mb={6}>
           you can add urls from the home page or just type{" "}
           <Typography component="span" color="primary">
-            tabless.vercel.app/
+            tabless.lol/
           </Typography>{" "}
           in front of any url to save it!
         </Typography>

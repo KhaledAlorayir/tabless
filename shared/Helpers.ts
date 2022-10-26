@@ -1,5 +1,3 @@
-import { ParsedUrlQuery } from "querystring";
-
 export const getTypeQuery = (type: number) => {
   return type === 0 ? "(1,2)" : `(${type})`;
 };

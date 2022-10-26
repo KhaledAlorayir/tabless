@@ -19,9 +19,7 @@ type Props = {
 export const getServerSideProps: GetServerSideProps<Props> = async ({
   query,
 }) => {
-  console.log(query);
   if (query.url) {
-    console.log(query);
     const arr = query.url as string[];
     arr[0] += "/";
     const joined = arr.join("/");
