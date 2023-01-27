@@ -7,13 +7,20 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useMemo } from "react";
+import { getParsedUrls } from "../../shared/Helpers";
+import { Link } from "../../shared/types";
 
-type Props = {};
+type Props = {
+  viewMode: 2 | 1;
+};
 
-const LinkList = (props: Props) => {
+const LinkList = ({ viewMode }: Props) => {
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useLinks();
-  const links = useMemo(() => data?.pages.flat(), [data]);
+  const links = useMemo(() => {
+    const flat = data?.pages.flat();
+    return viewMode === 1 ? (flat as Link[]) : getParsedUrls(flat);
+  }, [data, viewMode]);
 
   if (isLoading) {
     return (
@@ -22,10 +29,10 @@ const LinkList = (props: Props) => {
       </Stack>
     );
   }
-
+  //TODO union type problem
   return (
     <>
-      {links && (
+      {links && viewMode === 1 && (
         <>
           {links.length > 0 ? (
             <InfiniteScroll

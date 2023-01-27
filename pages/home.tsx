@@ -9,6 +9,8 @@ import Insert from "../components/home/Insert";
 import LinkList from "../components/home/LinkList";
 import Filter from "../components/home/Filter";
 import AutoInsert from "../components/home/AutoInsert";
+import ViewToggle from "../components/home/ViewToggle";
+import { useState } from "react";
 
 export const getStaticProps = async () => {
   const { data } = await supabase.from("link_type").select("*");
@@ -38,14 +40,17 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
     };
   }, [isLoading]);
 
+  const [viewMode, setViewMode] = useState<1 | 2>(1);
+
   return (
     <>
       {data && (
         <Box px={4} height="100%">
           <Filter link_types={link_types} />
           <Insert link_types={link_types} />
-          <LinkList />
+          <LinkList viewMode={viewMode} />
           <AutoInsert />
+          <ViewToggle setViewMode={setViewMode} viewMode={viewMode} />
         </Box>
       )}
     </>
