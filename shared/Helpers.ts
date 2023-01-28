@@ -36,3 +36,8 @@ export const getParsedUrls = (links: Link[] | undefined) => {
 
   return result;
 };
+
+export const getFaviconUrl = (url: string) => {
+  const url_split = url.split("/");
+  return `${url_split[0]}//${url_split[2]}/favicon.ico`;
+};
