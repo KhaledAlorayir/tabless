@@ -6,7 +6,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { getParsedUrls } from "../../shared/Helpers";
 import { Link, DomainList } from "../../shared/types";
 import DomainListCard from "./DomainListCard";
@@ -25,8 +25,6 @@ const LinkList = ({ viewMode }: Props) => {
 
   const viewMode1Data = links as Link[];
   const viewMode2Data = links as DomainList[];
-
-  const [isOpen, setIsOpen] = useState(false);
 
   if (isLoading) {
     return (
