@@ -7,13 +7,24 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useMemo } from "react";
+import { getParsedUrls } from "../../shared/Helpers";
+import { Link, DomainList } from "../../shared/types";
+import DomainListCard from "./DomainListCard";
 
-type Props = {};
+type Props = {
+  viewMode: 2 | 1;
+};
 
-const LinkList = (props: Props) => {
+const LinkList = ({ viewMode }: Props) => {
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useLinks();
-  const links = useMemo(() => data?.pages.flat(), [data]);
+  const links = useMemo(() => {
+    const flat = data?.pages.flat();
+    return viewMode === 1 ? flat : getParsedUrls(flat);
+  }, [data, viewMode]);
+
+  const viewMode1Data = links as Link[];
+  const viewMode2Data = links as DomainList[];
 
   if (isLoading) {
     return (
@@ -47,11 +58,23 @@ const LinkList = (props: Props) => {
                 columns={{ xs: 4, sm: 8, md: 12 }}
                 mb={2}
               >
-                {links.map((l) => (
-                  <Grid key={l.id} xs={12} sm={4} md={4} xl={3}>
-                    <LinkCard link={l} />
-                  </Grid>
-                ))}
+                {viewMode === 1 ? (
+                  <>
+                    {viewMode1Data.map((link) => (
+                      <Grid key={link.id} xs={12} sm={4} md={4} xl={3}>
+                        <LinkCard link={link} />
+                      </Grid>
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    {viewMode2Data.map((list) => (
+                      <Grid key={list.domain} xs={12} md={4} xl={3}>
+                        <DomainListCard list={list} />
+                      </Grid>
+                    ))}
+                  </>
+                )}
               </Grid>
             </InfiniteScroll>
           ) : (

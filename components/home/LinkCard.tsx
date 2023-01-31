@@ -11,6 +11,7 @@ import dayjs from "dayjs";
 import useDeleteLink from "../../shared/hooks/db/useDeleteLink";
 import { useEdit } from "../../shared/store";
 import LinkIcon from "@mui/icons-material/Link";
+import { getFaviconUrl } from "../../shared/Helpers";
 
 type Props = {
   link: Link;
@@ -19,14 +20,13 @@ type Props = {
 const LinkCard = ({ link }: Props) => {
   const { mutate, isLoading } = useDeleteLink();
   const setEdit = useEdit((store) => store.setEdit);
-  const url_split = link.url.split("/");
 
   return (
     <Card>
       <CardContent>
         <Stack direction="row" alignItems="center" mb={2}>
           <Avatar
-            src={`${url_split[0]}//${url_split[2]}/favicon.ico`}
+            src={getFaviconUrl(link.url)}
             alt="favicon"
             sx={{ width: 20, height: 20 }}
           >

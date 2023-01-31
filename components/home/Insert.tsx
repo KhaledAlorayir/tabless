@@ -87,7 +87,7 @@ const Insert = ({ link_types }: Props) => {
         onClick={openModal}
         color="info"
         aria-label="add"
-        sx={{ position: "fixed", bottom: 50, right: 30 }}
+        sx={{ position: "fixed", bottom: 15, right: 25 }}
       >
         <AddIcon />
       </Fab>

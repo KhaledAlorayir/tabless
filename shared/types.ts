@@ -39,3 +39,8 @@ export type AutoAdd = {
   url: string;
   title: string;
 } | null;
+
+export interface DomainList {
+  domain: string;
+  urls: Link[];
+}
