@@ -6,19 +6,10 @@ import LinearProgress from "@mui/material/LinearProgress";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useMemo } from "react";
-import { getFaviconUrl, getParsedUrls } from "../../shared/Helpers";
-import { Link } from "../../shared/types";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListSubheader from "@mui/material/ListSubheader";
-import Avatar from "@mui/material/Avatar";
-import LinkIcon from "@mui/icons-material/Link";
-import MuiLink from "@mui/material/Link";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import IconButton from "@mui/material/IconButton";
-import { Box } from "@mui/material";
+import { useMemo, useState } from "react";
+import { getParsedUrls } from "../../shared/Helpers";
+import { Link, DomainList } from "../../shared/types";
+import DomainListCard from "./DomainListCard";
 
 type Props = {
   viewMode: 2 | 1;
@@ -33,10 +24,9 @@ const LinkList = ({ viewMode }: Props) => {
   }, [data, viewMode]);
 
   const viewMode1Data = links as Link[];
-  const viewMode2Data = links as {
-    domain: string;
-    urls: Link[];
-  }[];
+  const viewMode2Data = links as DomainList[];
+
+  const [isOpen, setIsOpen] = useState(false);
 
   if (isLoading) {
     return (
@@ -45,19 +35,7 @@ const LinkList = ({ viewMode }: Props) => {
       </Stack>
     );
   }
-  //TODO union type problem
 
-  /*
-    finish desgin
-    - list item
-    - list item collabse
-
-    split into components viewmod1 & 2
-
-    //
-    edit & delete func should be a hook to easily share
-    update: no they are a couple of lines
-  */
   return (
     <>
       {links && (
@@ -93,53 +71,8 @@ const LinkList = ({ viewMode }: Props) => {
                 ) : (
                   <>
                     {viewMode2Data.map((list) => (
-                      <Grid key={list.domain} xs={12} sm={4} md={4} xl={3}>
-                        <List
-                          sx={{ bgcolor: "action.disabledBackground" }}
-                          subheader={
-                            <ListSubheader
-                              sx={{
-                                bgcolor: "action.disabledBackground",
-                                paddingY: 2,
-                              }}
-                            >
-                              <Stack
-                                direction="row"
-                                alignItems="center"
-                                spacing={2}
-                              >
-                                <Avatar
-                                  src={getFaviconUrl(list.urls[0].url)}
-                                  alt="favicon"
-                                  sx={{ width: 20, height: 20 }}
-                                >
-                                  <LinkIcon />
-                                </Avatar>
-                                <Typography> {list.domain}</Typography>
-                              </Stack>
-                            </ListSubheader>
-                          }
-                        >
-                          {list.urls.map((link) => (
-                            <ListItem key={link.id}>
-                              <MuiLink
-                                href={link.url}
-                                target="_blank"
-                                rel="noopener"
-                              >
-                                {link.title}
-                              </MuiLink>
-                              <Box>
-                                <IconButton>
-                                  <EditIcon />
-                                </IconButton>
-                                <IconButton>
-                                  <DeleteIcon />
-                                </IconButton>
-                              </Box>
-                            </ListItem>
-                          ))}
-                        </List>
+                      <Grid key={list.domain} xs={12} md={4} xl={3}>
+                        <DomainListCard list={list} />
                       </Grid>
                     ))}
                   </>

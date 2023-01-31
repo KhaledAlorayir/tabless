@@ -16,7 +16,7 @@ const ViewToggle = ({ setViewMode, viewMode }: Props) => {
       orientation="horizontal"
       value={viewMode}
       onChange={(e, v) => setViewMode(v)}
-      sx={{ position: "fixed", bottom: 50, left: 30 }}
+      sx={{ position: "fixed", bottom: 15, left: 25 }}
     >
       <ToggleButton value={1}>
         <ViewModuleIcon />

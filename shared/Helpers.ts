@@ -1,4 +1,4 @@
-import { Link } from "./types";
+import { Link, DomainList } from "./types";
 
 export const getTypeQuery = (type: number) => {
   return type === 0 ? "(1,2)" : `(${type})`;
@@ -11,7 +11,7 @@ export const getPagination = (pageParam: number, PAGE_LIMIT: number) => {
 };
 
 export const getParsedUrls = (links: Link[] | undefined) => {
-  let result: { domain: string; urls: Link[] }[] = [];
+  let result: DomainList[] = [];
 
   let domains = links?.map((link) => {
     let urlArr = link.url.split("//")[1].split(".");
